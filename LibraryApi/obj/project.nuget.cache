@@ -1,13 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Lv3S4yrrPJg=",
+  "dgSpecHash": "L5X6G3t4DdQ=",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\source\\repos\\LibraryApi\\LibraryApi\\LibraryApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.3.1\\microsoft.aspnetcore.identity.2.3.1.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\10.0.0\\microsoft.aspnetcore.jsonpatch.10.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\10.0.0\\microsoft.aspnetcore.mvc.newtonsoftjson.10.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0-rc.2.25502.107\\microsoft.aspnetcore.openapi.10.0.0-rc.2.25502.107.nupkg.sha512",
@@ -80,18 +79,5 @@
     "C:\\Users\\USER\\.nuget\\packages\\system.security.permissions\\9.0.0\\system.security.permissions.9.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\system.windows.extensions\\9.0.0\\system.windows.extensions.9.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1510",
-      "level": "Warning",
-      "message": "PackageReference Microsoft.AspNetCore.Identity will not be pruned. Consider removing this package from your dependencies, as it is likely unnecessary.",
-      "projectPath": "C:\\Users\\USER\\source\\repos\\LibraryApi\\LibraryApi\\LibraryApi.csproj",
-      "warningLevel": 1,
-      "filePath": "C:\\Users\\USER\\source\\repos\\LibraryApi\\LibraryApi\\LibraryApi.csproj",
-      "libraryId": "Microsoft.AspNetCore.Identity",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  "logs": []
 }
