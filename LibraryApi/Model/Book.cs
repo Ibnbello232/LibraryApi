@@ -11,5 +11,13 @@
         [Required]
         public int PublicationYear { get; set; }
 
+        [Required]
+        public object AuthorId { get; internal set; } = string.Empty;
+
+        [Required]
+        public object GenreId { get; internal set;  } = string.Empty;
+
+        
+
     }
 }

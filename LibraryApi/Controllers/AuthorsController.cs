@@ -1,15 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using LibraryApi.DTO;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using LibraryApi.Data;
 using LibraryApi.Repositories.Interface;
 using LibraryApi.Model;
+using System;
 namespace LibraryApi.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
-    public class AuthorsController : ControllerBase
+    public class AuthorsController : ControllerBase 
     {
         private readonly LibraryApiDbContext _context;
 
@@ -19,10 +21,10 @@ namespace LibraryApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<AuthorDTO>> GetAuthors()
+        public ActionResult<IEnumerable<Author>> GetAllAuthors()
 
         {
-           var Authors = _context.Authors.GetAllAuthors();
+          
             return _context.Authors.ToList();
 
         }
@@ -30,20 +32,18 @@ namespace LibraryApi.Controllers
         public Author? GetAuthorById(Guid id)
 
         {
-
             return _context.Authors.FirstOrDefault(a => a.Id == id);
-
         }
-
         [HttpPost]
-        public void AddAuthor(Author author)
+        public async  Task <ActionResult<Author>> AddAuthor(Author author)
 
         {
-
             _context.Authors.Add(author);
 
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
 
+            return CreatedAtAction(nameof(GetAuthorById), new { id = author.Id });
+        
         }
 
 

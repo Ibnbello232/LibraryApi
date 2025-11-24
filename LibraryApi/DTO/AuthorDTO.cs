@@ -27,6 +27,6 @@ using System.ComponentModel.DataAnnotations;
 
         public string Bio { get; set; } = string.Empty;
  
-    public int DateOfBirth { get; set; }
+       public int DateOfBirth { get; set; }
     }
 }

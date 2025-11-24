@@ -1,25 +1,40 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using LibraryApi.Data;
-    
-    
-    var builder = WebApplication.CreateBuilder(args);
+using LibraryApi.Controllers;
+using LibraryApi.DTO;
+using LibraryApi.Migrations;
+using LibraryApi.Model;
+using LibraryApi.Repositories;
+
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<LibraryApiDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryApi")));
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<LibraryApiDbContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("LibraryApi")));
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
+
 {
-    app.MapOpenApi();
+
+    app.UseSwagger();
+
+    app.UseSwaggerUI();
+
 }
 
 app.UseHttpsRedirection();
@@ -29,3 +44,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
