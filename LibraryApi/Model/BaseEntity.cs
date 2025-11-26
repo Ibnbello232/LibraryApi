@@ -8,9 +8,9 @@ using System.ComponentModel.DataAnnotations;
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public DateTime UpdatedDate { get; set; } = DateTime.Now;
-
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public bool IsDeleted { get; internal set; }
     }
 }
