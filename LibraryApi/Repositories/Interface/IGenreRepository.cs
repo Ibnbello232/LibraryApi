@@ -1,15 +1,7 @@
 ﻿using LibraryApi.Model;
+using LibraryApi.Repositories.Interfaces;
 
-namespace LibraryApi.Repositories.Interface
+namespace LibraryApi.Repositories
 {
-    public interface IGenreRepository
-    {
-        IEnumerable<Genre> GetAllGenres();
-        Genre? GetGenreById(Guid Id);
-        void AddGenre(Genre genre);
-
-        void UpdateGenre(Genre genre);
-
-        void DeleteGenre(Guid Id);
-    }
+    public interface IGenreRepository : IGenericRepository<Genre> { }
 }

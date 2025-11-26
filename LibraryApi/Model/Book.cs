@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using LibraryApi.Model;
     
     namespace LibraryApi.Model
 {
@@ -11,12 +13,16 @@
         [Required]
         public int PublicationYear { get; set; }
 
-        [Required]
-        public object AuthorId { get; internal set; } = string.Empty;
+        [ForeignKey("Author")]
+        public Guid AuthorId { get; set; }
 
-        [Required]
-        public object GenreId { get; internal set;  } = string.Empty;
+        public Author Author { get; set; } = null!;
 
+        [ForeignKey("Genre")]
+
+        public Guid GenreId { get; set; }
+
+        public Genre Genre { get; set; } = null!;
         
 
     }

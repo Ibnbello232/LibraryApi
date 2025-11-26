@@ -1,23 +1,14 @@
 ﻿using LibraryApi.Model;
 using System.ComponentModel.DataAnnotations;
-    
-    namespace LibraryApi.DTO
+
+namespace LibraryApi.DTO
 {
-    public class CreateGenreDTO : BaseEntity
+    public class GenreDto
     {
-        [Required , MaxLength(100)]
-        public string Name { get; set; } = string.Empty;
 
-        [Required , MaxLength (500)]
-        public string Description { get; set; } = string.Empty;
-    }
+        [Required]
+        public string Name { get; set; } = default!;
 
-    public class GenreUpdateDTO :CreateGenreDTO { }
-    public class GenreReadDTO : BaseEntity
-    {
-      
-      public string Name { get; set; } = string.Empty;
-
-      public string Description { get; set; } = string.Empty;
+        public string Description { get; set; } = default!;
     }
 }

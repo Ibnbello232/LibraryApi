@@ -13,6 +13,8 @@
         [Required]
         public int DateOfBirth { get; set; }
 
+        public ICollection<Book> Books { get; set; } = new List<Book>();
+
     }
 
     

@@ -1,76 +1,64 @@
-﻿using LibraryApi.Model;
+﻿using LibraryApi.Repositories;
 using LibraryApi.Repositories.Interface;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 using LibraryApi.Data;
+using LibraryApi.Model;
+using Microsoft.EntityFrameworkCore;
 
-
-namespace LibraryApi.Repositories
+namespace LibraryApi.Repositories.Implementations
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : GenericRepository<Book>, IBookRepository
     {
+        private new readonly LibraryApiDbContext _context;
 
-            private readonly LibraryApiDbContext _context;
-            public BookRepository(LibraryApiDbContext context)
-            {
-                _context = context;
-            }
+        public BookRepository(LibraryApiDbContext context) : base(context)
+        {
+            _context = context;
+        }
 
-            public IEnumerable<Book> GetAllBooks()
+        public override async Task<IEnumerable<Book>> GetAllAsync()
+        {
+            return await _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .ToListAsync();
+        }
 
-            {
+        public override async Task<Book?> GetByIdAsync(Guid id)
+        {
+            return await _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .FirstOrDefaultAsync(b => b.Id == id);
+        }
 
-                return _context.Books.ToList();
+        public async Task<IEnumerable<Book>> SearchAsync(string keyword)
+        {
+            return await _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .Where(b =>
+                    b.Title.Contains(keyword) ||
+                    b.Author.FirstName.Contains(keyword) ||
+                    b.Author.LastName.Contains(keyword))
+                .ToListAsync();
+        }
 
-            }
+        public async Task<IEnumerable<Book>> GetBooksByAuthorIdAsync(Guid authorId)
+        {
+            return await _context.Books
+                .Include(b => b.Genre)
+                .Where(b => b.AuthorId == authorId)
+                .ToListAsync();
+        }
 
-            public Book? GetBookById(Guid id)
-
-            {
-
-                return _context.Books.FirstOrDefault(a => a.Id == id);
-
-            }
-
-            public void AddBook(Book book)
-
-            {
-
-                _context.Books.Add(book);
-
-                _context.SaveChanges();
-
-            }
-
-            public void UpdateBook(Book book)
-
-            {
-
-                _context.Books.Update(book);
-
-                _context.SaveChanges();
-
-            }
-
-            public void DeleteBook(Guid id)
-
-            {
-
-
-                var book = _context.Books.FirstOrDefault(a => a.Id == id);
-
-                if (book != null)
-                {
-
-                    _context.Books.Remove(book); 
-
-                    _context.SaveChanges();
-
-                }
-
-            }
-
-       
+        public async Task<IEnumerable<Book>> GetPagedBooksAsync(int page, int pageSize)
+        {
+            return await _context.Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
     }
 }
